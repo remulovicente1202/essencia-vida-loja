@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Essência & Vida — Loja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Jost:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1A1A18; --accent:#C9A961; --secondary:#6B5B47; --text:#EDE6D8; --card:#1D1916;
+  --shell-bg:#141312; --shell-line:rgba(255,255,255,0.08);
+  --radius:14px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--shell-bg); color:var(--text); font-family:'Jost',sans-serif;
+  min-height:100vh; display:flex; flex-direction:column; transition:background .4s ease;
+  padding-bottom:64px; /* space for radio bar */
+}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer; border:none;}
+img{max-width:100%; display:block;}
+
+/* ---------- NAV ---------- */
+header.topnav{
+  position:sticky; top:0; z-index:40; background:var(--shell-bg);
+  border-bottom:1px solid var(--shell-line); padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.brand{display:flex; align-items:center; gap:10px; font-family:'Cormorant Garamond',serif; font-size:24px; letter-spacing:.5px;}
+.brand .mark{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 180deg,#C9A961,#4A7A64,#E8703A,#C9A961); flex:0 0 auto;}
+nav.tabs{display:flex; gap:6px; background:rgba(255,255,255,.04); padding:4px; border-radius:999px;}
+nav.tabs button{
+  padding:8px 16px; border-radius:999px; background:transparent; color:var(--text);
+  font-size:14px; letter-spacing:.3px; opacity:.75; transition:all .25s;
+}
+nav.tabs button.active{background:var(--accent); color:#141312; opacity:1; font-weight:600;}
+nav.tabs button:hover{opacity:1;}
+.navRight{display:flex; align-items:center; gap:10px;}
+.adminDot{width:8px;height:8px;border-radius:50%;background:var(--shell-line); cursor:pointer;}
+
+/* Mobile nav */
+@media(max-width:720px){
+  header.topnav{flex-wrap:wrap; padding:12px 14px;}
+  nav.tabs{order:3; width:100%; justify-content:center; margin-top:8px;}
+  .brand{font-size:20px;}
+}
+
+/* ---------- MAIN VIEW SHELL ---------- */
+main{flex:1;}
+.view-vitaminas, .view-perfumes, .view-home{
+  --bg:#1A1A18; background:var(--bg); color:var(--text); min-height:60vh;
+}
+.hero{padding:48px 24px 32px; text-align:center;}
+.hero h1{font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:600; letter-spacing:.5px;}
+.hero p{opacity:.75; margin-top:10px; font-size:15px; max-width:520px; margin-inline:auto;}
+.hero .eyebrow{letter-spacing:3px; text-transform:uppercase; font-size:11px; opacity:.6; margin-bottom:10px;}
+
+/* HOME */
+.view-home .hero h1{font-family:'Cormorant Garamond',serif;}
+.catGrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; padding:0 24px 40px; max-width:1000px; margin:0 auto;}
+.catCard{
+  border-radius:20px; padding:32px 24px; position:relative; overflow:hidden; min-height:180px;
+  display:flex; flex-direction:column; justify-content:flex-end; border:1px solid var(--shell-line);
+  transition:transform .3s ease;
+}
+.catCard:hover{transform:translateY(-4px);}
+.catCard h3{font-family:'Cormorant Garamond',serif; font-size:28px;}
+.catCard span{font-size:13px; opacity:.7; margin-top:4px; display:block;}
+.featured{padding:0 24px 60px; max-width:1200px; margin:0 auto;}
+.featured h2{font-family:'Cormorant Garamond',serif; font-size:26px; margin-bottom:18px; padding-left:4px;}
+
+/* PRODUCT GRID */
+.prodGrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:22px; padding:0 24px 60px; max-width:1200px; margin:0 auto;}
+.prodCard{
+  background:var(--card); border-radius:var(--radius); overflow:hidden; border:1px solid var(--shell-line);
+  display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease;
+}
+.prodCard:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.prodMedia{aspect-ratio:1/1; background:#00000022; position:relative; overflow:hidden;}
+.prodMedia img,.prodMedia video{width:100%; height:100%; object-fit:cover;}
+.prodTag{position:absolute; top:10px; left:10px; background:var(--accent); color:#161412; font-size:11px; padding:4px 10px; border-radius:999px; font-weight:600; letter-spacing:.3px;}
+.prodBody{padding:16px 16px 18px; display:flex; flex-direction:column; gap:6px; flex:1;}
+.prodBody h4{font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600;}
+.prodSize{font-size:12px; opacity:.65; text-transform:uppercase; letter-spacing:.5px;}
+.prodDesc{font-size:13px; opacity:.75; line-height:1.5; flex:1;}
+.prodFooter{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+.prodPrice{font-size:19px; font-weight:600; color:var(--accent);}
+.buyBtn{background:var(--accent); color:#161412; padding:9px 16px; border-radius:999px; font-size:13px; font-weight:600; letter-spacing:.3px;}
+.buyBtn:hover{filter:brightness(1.08);}
+
+/* Vitaminas theme signature: soft blob backdrop */
+.view-vitaminas .hero{position:relative;}
+.view-vitaminas .hero::before{
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
+  background:radial-gradient(circle at 20% 20%, #E8703A22, transparent 40%), radial-gradient(circle at 80% 30%, #4A7A6433, transparent 45%);
+}
+.view-vitaminas .prodCard{border-radius:22px;}
+.view-vitaminas .prodTag{border-radius:8px;}
+
+/* Perfumes theme signature: thin gold hairline frame */
+.view-perfumes .prodCard{border:1px solid #C9A96144; position:relative;}
+.view-perfumes .prodCard::before{
+  content:""; position:absolute; inset:6px; border:1px solid #C9A96122; pointer-events:none; z-index:2; border-radius:8px;
+}
+.view-perfumes .prodBody h4{font-style:italic;}
+.view-perfumes .hero h1{font-weight:400; font-style:italic;}
+
+/* ---------- MODAL (checkout) ---------- */
+.overlay{position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(3px); z-index:80; display:flex; align-items:center; justify-content:center; padding:20px;}
+.modal{background:#1D1B18; color:#EDE6D8; border-radius:16px; max-width:420px; width:100%; padding:26px; border:1px solid rgba(255,255,255,.08); max-height:88vh; overflow-y:auto;}
+.modal h3{font-family:'Cormorant Garamond',serif; font-size:24px; margin-bottom:4px;}
+.modal .modalPrice{color:#C9A961; font-size:20px; font-weight:600; margin-bottom:16px;}
+.payOpt{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+.payOpt button{background:#2A2621; border:1px solid rgba(255,255,255,.1); padding:14px; border-radius:10px; text-align:left; color:#EDE6D8;}
+.payOpt button:hover{border-color:#C9A961;}
+.payOpt button b{display:block; font-size:14px;}
+.payOpt button span{font-size:12px; opacity:.65;}
+.qrBox{text-align:center; margin-top:14px;}
+.qrBox img{margin:0 auto; border-radius:8px; background:#fff; padding:8px;}
+.pixKeyRow{display:flex; gap:8px; margin-top:10px;}
+.pixKeyRow input{flex:1; background:#141210; border:1px solid rgba(255,255,255,.1); color:#EDE6D8; padding:9px; border-radius:8px; font-size:13px;}
+.pixKeyRow button{background:#C9A961; color:#141210; padding:0 14px; border-radius:8px; font-size:13px; font-weight:600;}
+.closeX{position:absolute; top:14px; right:16px; font-size:20px; opacity:.6; cursor:pointer; background:none;}
+.modal{position:relative;}
+
+/* ---------- FOOTER ---------- */
+footer.siteFooter{background:#0F0E0D; border-top:1px solid var(--shell-line); padding:34px 24px; margin-top:20px;}
+.footGrid{max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; font-size:13px; opacity:.85;}
+.footGrid .col b{display:block; font-family:'Cormorant Garamond',serif; font-size:16px; margin-bottom:6px; opacity:1;}
+.footGrid .col div{margin-top:4px;}
+
+/* ---------- RADIO BAR ---------- */
+.radioBar{
+  position:fixed; bottom:0; left:0; right:0; z-index:60; background:#0F0E0D; border-top:1px solid var(--shell-line);
+  padding:8px 16px; display:flex; align-items:center; gap:12px; font-size:12px;
+}
+.radioBar select{background:#1D1B18; color:#EDE6D8; border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:6px 10px; font-size:12px;}
+.radioBar button.playPause{background:var(--accent, #C9A961); color:#161412; width:34px; height:34px; border-radius:50%; flex:0 0 auto; font-size:14px;}
+.radioBar .label{opacity:.6; letter-spacing:.5px; text-transform:uppercase; font-size:10px; display:none;}
+@media(min-width:600px){.radioBar .label{display:inline;}}
+.radioBar .status{margin-left:auto; opacity:.55; font-size:11px;}
+
+/* ---------- ADMIN ---------- */
+.view-admin{background:#111110; min-height:80vh; padding:26px 20px 60px;}
+.adminWrap{max-width:1100px; margin:0 auto;}
+.adminHead{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:20px;}
+.adminHead h2{font-family:'Cormorant Garamond',serif; font-size:28px;}
+.adminTabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
+.adminTabs button{background:#1D1B18; color:#EDE6D8; padding:8px 16px; border-radius:8px; font-size:13px; border:1px solid rgba(255,255,255,.08);}
+.adminTabs button.active{background:#C9A961; color:#141210; font-weight:600;}
+.panel{background:#171512; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:20px;}
+.formGrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+.field{display:flex; flex-direction:column; gap:5px;}
+.field label{font-size:11px; opacity:.6; text-transform:uppercase; letter-spacing:.4px;}
+.field input,.field select,.field textarea{
+  background:#0F0E0D; border:1px solid rgba(255,255,255,.12); color:#EDE6D8; padding:9px 10px; border-radius:8px; font-size:13px; font-family:inherit;
+}
+.field textarea{min-height:70px; resize:vertical;}
+.field.colorField input[type=color]{height:38px; padding:2px;}
+.adminBtn{background:#C9A961; color:#141210; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:600; margin-top:14px;}
+.adminBtnGhost{background:transparent; border:1px solid rgba(255,255,255,.2); color:#EDE6D8; padding:8px 14px; border-radius:8px; font-size:12px;}
+.adminList{margin-top:22px; display:flex; flex-direction:column; gap:10px;}
+.adminRow{display:flex; align-items:center; gap:12px; background:#0F0E0D; border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:10px 12px;}
+.adminRow img{width:44px; height:44px; object-fit:cover; border-radius:6px; flex:0 0 auto; background:#222;}
+.adminRow .grow{flex:1; min-width:0;}
+.adminRow .grow b{font-size:14px;}
+.adminRow .grow span{font-size:12px; opacity:.6; display:block;}
+.adminRow .rowBtns{display:flex; gap:6px;}
+.adminRow .rowBtns button{background:#1D1B18; border:1px solid rgba(255,255,255,.1); color:#EDE6D8; font-size:11px; padding:6px 10px; border-radius:6px;}
+.adminRow .rowBtns button.danger{color:#E8703A; border-color:#E8703A55;}
+.noteCard{background:#0F0E0D; border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:12px; margin-top:10px;}
+.noteCard .meta{font-size:11px; opacity:.5; margin-top:6px;}
+
+/* login gate */
+.loginGate{max-width:340px; margin:80px auto; text-align:center; padding:0 20px;}
+.loginGate h2{font-family:'Cormorant Garamond',serif; font-size:26px; margin-bottom:6px;}
+.loginGate p{font-size:13px; opacity:.6; margin-bottom:18px;}
+.loginGate input{width:100%; background:#0F0E0D; border:1px solid rgba(255,255,255,.15); color:#EDE6D8; padding:11px; border-radius:8px; margin-bottom:10px; text-align:center;}
+.loginGate .err{color:#E8703A; font-size:12px; min-height:16px; margin-bottom:6px;}
+
+.toast{position:fixed; bottom:74px; left:50%; transform:translateX(-50%); background:#1D1B18; color:#EDE6D8; padding:10px 18px; border-radius:999px; font-size:13px; border:1px solid rgba(255,255,255,.1); z-index:100; opacity:0; transition:opacity .3s;}
+.toast.show{opacity:1;}
+.empty{opacity:.5; font-size:13px; padding:20px 4px;}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="brand"><div class="mark"></div>Essência & Vida</div>
+  <nav class="tabs" id="tabsNav"></nav>
+  <div class="navRight">
+    <span class="adminDot" title="admin" onclick="goTo('admin')"></span>
+  </div>
+</header>
+
+<main id="mainView"></main>
+
+<footer class="siteFooter">
+  <div class="footGrid">
+    <div class="col">
+      <b>Fale com a gente</b>
+      <div id="footPhone">📞 —</div>
+      <div id="footEmail">✉️ —</div>
+    </div>
+    <div class="col">
+      <b>Pagamento</b>
+      <div>Pix • Dinheiro na entrega (combinado via WhatsApp)</div>
+    </div>
+    <div class="col">
+      <b>Essência & Vida</b>
+      <div style="opacity:.55">Produtos selecionados, entrega combinada, atendimento direto.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="radioBar">
+  <span class="label">Rádio</span>
+  <select id="radioSelect"></select>
+  <button class="playPause" id="playPauseBtn">▶</button>
+  <span class="status" id="radioStatus">parado</span>
+  <audio id="radioAudio" preload="none"></audio>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ======================= DADOS / ESTADO ======================= */
+const DEFAULT_SETTINGS = {
+  pixKey: "essenciavida@pix.com.br",
+  whatsapp: "5591990000000",
+  email: "contato@essenciavida.com.br",
+  phone: "(91) 99000-0000",
+  adminPassword: "galog2026"
+};
+
+const DEFAULT_CATEGORIES = [
+  { id:"vitaminas", name:"Vitaminas & Suplementos", unit:"mg", order:1,
+    theme:{ bg:"#FBF7EF", accent:"#E8703A", secondary:"#4A7A64", text:"#2B2620", card:"#FFFFFF" } },
+  { id:"perfumes", name:"Perfumes", unit:"ml", order:2,
+    theme:{ bg:"#14110F", accent:"#C9A961", secondary:"#6B5B47", text:"#EDE6D8", card:"#1D1916" } }
+];
+
+const DEFAULT_PRODUCTS = [
+  { id:"p1", categoryId:"vitaminas", name:"Ômega 3 Ultra", price:79.90,
+    size:"1000", image:"https://images.unsplash.com/photo-1584017911766-d451b3d0e843?q=80&w=600&auto=format&fit=crop",
+    video:"", desc:"Cápsulas de óleo de peixe concentrado, ricas em EPA e DHA. Apoia coração, memória e articulações. Frasco com 60 cápsulas." },
+  { id:"p2", categoryId:"perfumes", name:"Noir Élégance", price:189.90,
+    size:"100", image:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=600&auto=format&fit=crop",
+    video:"", desc:"Fragrância amadeirada e ambarada, com abertura de bergamota e fundo de baunilha. Fixação prolongada, ideal para a noite." }
+];
+
+const DEFAULT_RADIO_STATIONS = [
+  { id:"eletronica", label:"Eletrônica (ambient/chill)", url:"https://ice.somafm.com/groovesalad" },
+  { id:"rock", label:"Rock / Indie", url:"https://ice.somafm.com/indiepop" },
+  { id:"lounge", label:"Lounge / Instrumental", url:"https://ice.somafm.com/dronezone" },
+  { id:"classica", label:"Clássica", url:"" },
+  { id:"forro_sertanejo", label:"Forró & Sertanejo", url:"" },
+  { id:"emalta", label:"Em alta / Pop", url:"" }
+];
+// As 3 primeiras já tocam (streams verificados da SomaFM). As demais ficam em branco de propósito:
+// rádios de forró/sertanejo/pop no Brasil trocam de endereço de stream com frequência, então é mais
+// seguro o admin colar o link atual na aba "Rádios" do painel do que eu deixar um link "chutado" que
+// pode já estar fora do ar. Veja instruções na própria aba do admin.
+
+let state = {
+  settings: {...DEFAULT_SETTINGS},
+  categories: [...DEFAULT_CATEGORIES],
+  products: [...DEFAULT_PRODUCTS],
+  notes: [], // notas sobre compradores
+  radioStations: [...DEFAULT_RADIO_STATIONS],
+  loaded:false
+};
+
+let route = "home";
+let adminUnlocked = false;
+let adminTab = "produtos";
+
+/* ======================= STORAGE ======================= */
+async function loadState(){
+  try{
+    const s = await window.storage.get("shop:settings", true);
+    if(s) state.settings = {...DEFAULT_SETTINGS, ...JSON.parse(s.value)};
+  }catch(e){}
+  try{
+    const c = await window.storage.get("shop:categories", true);
+    if(c) state.categories = JSON.parse(c.value);
+  }catch(e){}
+  try{
+    const p = await window.storage.get("shop:products", true);
+    if(p) state.products = JSON.parse(p.value);
+  }catch(e){}
+  try{
+    const n = await window.storage.get("shop:notes", true);
+    if(n) state.notes = JSON.parse(n.value);
+  }catch(e){}
+  try{
+    const r = await window.storage.get("shop:radios", true);
+    if(r) state.radioStations = JSON.parse(r.value);
+  }catch(e){}
+  state.loaded = true;
+}
+async function saveSettings(){ try{ await window.storage.set("shop:settings", JSON.stringify(state.settings), true); }catch(e){} }
+async function saveCategories(){ try{ await window.storage.set("shop:categories", JSON.stringify(state.categories), true); }catch(e){} }
+async function saveProducts(){ try{ await window.storage.set("shop:products", JSON.stringify(state.products), true); }catch(e){} }
+async function saveNotes(){ try{ await window.storage.set("shop:notes", JSON.stringify(state.notes), true); }catch(e){} }
+async function saveRadios(){ try{ await window.storage.set("shop:radios", JSON.stringify(state.radioStations), true); }catch(e){} }
+
+/* ======================= HELPERS ======================= */
+function uid(prefix){ return prefix + "_" + Math.random().toString(36).slice(2,9); }
+function money(v){ return "R$ " + Number(v||0).toFixed(2).replace(".", ","); }
+function esc(s){ return (s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(window._toastT);
+  window._toastT = setTimeout(()=>t.classList.remove("show"), 2400);
+}
+function getCategory(id){ return state.categories.find(c=>c.id===id); }
+function applyTheme(theme){
+  document.documentElement.style.setProperty("--bg", theme.bg);
+  document.documentElement.style.setProperty("--accent", theme.accent);
+  document.documentElement.style.setProperty("--secondary", theme.secondary);
+  document.documentElement.style.setProperty("--text", theme.text);
+  document.documentElement.style.setProperty("--card", theme.card);
+}
+function resetShellTheme(){
+  document.documentElement.style.setProperty("--bg", "#141312");
+  document.documentElement.style.setProperty("--accent", "#C9A961");
+  document.documentElement.style.setProperty("--secondary", "#6B5B47");
+  document.documentElement.style.setProperty("--text", "#EDE6D8");
+  document.documentElement.style.setProperty("--card", "#1D1916");
+}
+
+/* ======================= ROUTER / NAV ======================= */
+function goTo(r){
+  route = r;
+  if(r === "admin" && !adminUnlocked){ location.hash = "#/admin"; }
+  else location.hash = "#/" + r;
+  render();
+}
+window.addEventListener("hashchange", ()=>{
+  const h = location.hash.replace("#/", "") || "home";
+  route = h;
+  render();
+});
+
+function renderNav(){
+  const nav = document.getElementById("tabsNav");
+  let html = `<button data-r="home" class="${route==='home'?'active':''}">Ofertas</button>`;
+  state.categories.sort((a,b)=>a.order-b.order).forEach(c=>{
+    html += `<button data-r="${c.id}" class="${route===c.id?'active':''}">${esc(c.name)}</button>`;
+  });
+  nav.innerHTML = html;
+  nav.querySelectorAll("button").forEach(b=> b.onclick = ()=> goTo(b.dataset.r));
+}
+
+/* ======================= RENDER: PRODUCT CARD ======================= */
+function productCardHTML(p, cat){
+  const unitLabel = cat.unit === "ml" ? `${p.size} ml` : `${p.size} mg`;
+  const media = p.video
+    ? `<video src="${esc(p.video)}" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()" poster="${esc(p.image)}"></video>`
+    : `<img src="${esc(p.image) || 'https://placehold.co/400x400/222/ccc?text=Produto'}" alt="${esc(p.name)}" loading="lazy">`;
+  return `
+  <div class="prodCard">
+    <div class="prodMedia">${media}<span class="prodTag">${esc(cat.unit)}</span></div>
+    <div class="prodBody">
+      <h4>${esc(p.name)}</h4>
+      <span class="prodSize">${unitLabel}</span>
+      <p class="prodDesc">${esc(p.desc)}</p>
+      <div class="prodFooter">
+        <span class="prodPrice">${money(p.price)}</span>
+        <button class="buyBtn" onclick="openCheckout('${p.id}')">Comprar</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ======================= RENDER: VIEWS ======================= */
+function renderHome(){
+  resetShellTheme();
+  const all = state.products;
+  let html = `<div class="view-home">
+    <div class="hero">
+      <div class="eyebrow">Vitrine geral</div>
+      <h1>Tudo em um só lugar</h1>
+      <p>Descubra vitaminas, suplementos e perfumes selecionados, com pagamento facilitado no site.</p>
+    </div>
+    <div class="catGrid">`;
+  state.categories.forEach(c=>{
+    html += `<div class="catCard" style="background:${c.theme.bg}; color:${c.theme.text}; border-color:${c.theme.accent}33" onclick="goTo('${c.id}')">
+      <h3 style="color:${c.theme.accent}">${esc(c.name)}</h3>
+      <span>${state.products.filter(p=>p.categoryId===c.id).length} produtos • ver categoria →</span>
+    </div>`;
+  });
+  html += `</div>
+    <div class="featured"><h2>Destaques</h2><div class="prodGrid">`;
+  if(all.length===0) html += `<div class="empty">Nenhum produto cadastrado ainda.</div>`;
+  all.slice(0,8).forEach(p=>{
+    const cat = getCategory(p.categoryId) || state.categories[0];
+    html += productCardHTML(p, cat);
+  });
+  html += `</div></div></div>`;
+  document.getElementById("mainView").innerHTML = html;
+}
+
+function renderCategory(catId){
+  const cat = getCategory(catId);
+  if(!cat){ renderHome(); return; }
+  applyTheme(cat.theme);
+  const prods = state.products.filter(p=>p.categoryId===catId);
+  let html = `<div class="view-${catId==='perfumes'?'perfumes':catId==='vitaminas'?'vitaminas':'home'}">
+    <div class="hero">
+      <div class="eyebrow" style="color:${cat.theme.accent}">${esc(cat.name)}</div>
+      <h1>${catId==='perfumes' ? 'Fragrâncias selecionadas' : catId==='vitaminas' ? 'Cuidado que vem de dentro' : esc(cat.name)}</h1>
+      <p>${catId==='perfumes' ? 'Aromas marcantes, entrega combinada, atendimento próximo.' : catId==='vitaminas' ? 'Suplementos escolhidos com cuidado para o seu dia a dia.' : ''}</p>
+    </div>
+    <div class="prodGrid">`;
+  if(prods.length===0) html += `<div class="empty">Nenhum produto nesta categoria ainda.</div>`;
+  prods.forEach(p=> html += productCardHTML(p, cat));
+  html += `</div></div>`;
+  document.getElementById("mainView").innerHTML = html;
+}
+
+/* ======================= CHECKOUT MODAL ======================= */
+function openCheckout(pid){
+  const p = state.products.find(x=>x.id===pid);
+  if(!p) return;
+  const root = document.getElementById("modalRoot");
+  root.innerHTML = `
+  <div class="overlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal">
+      <button class="closeX" onclick="closeModal()">×</button>
+      <h3>${esc(p.name)}</h3>
+      <div class="modalPrice">${money(p.price)}</div>
+      <div class="payOpt">
+        <button onclick="showPix('${p.id}')"><b>Pagar com Pix</b><span>Copiar chave e enviar comprovante</span></button>
+        <button onclick="payWhatsapp('${p.id}')"><b>Pagar em dinheiro</b><span>Combinar entrega presencial via WhatsApp</span></button>
+      </div>
+      <div id="checkoutExtra"></div>
+    </div>
+  </div>`;
+}
+function closeModal(){ document.getElementById("modalRoot").innerHTML = ""; }
+function showPix(pid){
+  const p = state.products.find(x=>x.id===pid);
+  const key = state.settings.pixKey;
+  const qr = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(key)}`;
+  document.getElementById("checkoutExtra").innerHTML = `
+    <div class="qrBox">
+      <img src="${qr}" width="150" height="150" alt="QR Pix">
+      <div class="pixKeyRow">
+        <input id="pixKeyInput" readonly value="${esc(key)}">
+        <button onclick="copyPix()">Copiar</button>
+      </div>
+      <p style="font-size:12px;opacity:.6;margin-top:8px">Após pagar, envie o comprovante pelo WhatsApp informando o produto: <b>${esc(p.name)}</b>.</p>
+    </div>`;
+}
+function copyPix(){
+  const el = document.getElementById("pixKeyInput");
+  el.select(); document.execCommand && document.execCommand("copy");
+  navigator.clipboard && navigator.clipboard.writeText(el.value);
+  toast("Chave Pix copiada!");
+}
+function payWhatsapp(pid){
+  const p = state.products.find(x=>x.id===pid);
+  const msg = encodeURIComponent(`Olá! Quero comprar "${p.name}" (${money(p.price)}). Vou pagar em dinheiro na entrega, podemos combinar?`);
+  window.open(`https://wa.me/${state.settings.whatsapp}?text=${msg}`, "_blank");
+  closeModal();
+}
+
+/* ======================= RADIO ======================= */
+function initRadio(){
+  const sel = document.getElementById("radioSelect");
+  const audio = document.getElementById("radioAudio");
+  const btn = document.getElementById("playPauseBtn");
+  const status = document.getElementById("radioStatus");
+
+  function populate(){
+    const prevVal = sel.value;
+    sel.innerHTML = state.radioStations.map(s=>`<option value="${s.id}">${esc(s.label)}${s.url?'':' (sem link)'}</option>`).join("");
+    if(state.radioStations.some(s=>s.id===prevVal)) sel.value = prevVal;
+  }
+  function setStation(){
+    const st = state.radioStations.find(s=>s.id===sel.value);
+    audio.pause(); btn.textContent="▶";
+    if(!st || !st.url){ audio.removeAttribute("src"); status.textContent = "sem link cadastrado para esta rádio"; return; }
+    audio.src = st.url;
+    status.textContent = "parado";
+  }
+  populate();
+  setStation();
+  sel.onchange = ()=> setStation();
+  btn.onclick = ()=>{
+    const st = state.radioStations.find(s=>s.id===sel.value);
+    if(!st || !st.url){ status.textContent = "cadastre o link desta rádio no painel admin"; return; }
+    if(audio.paused){
+      status.textContent = "carregando…";
+      audio.play().then(()=>{ btn.textContent="⏸"; status.textContent="tocando"; })
+        .catch(()=>{ status.textContent="não foi possível tocar esta rádio agora"; });
+    } else {
+      audio.pause(); btn.textContent="▶"; status.textContent="parado";
+    }
+  };
+  audio.onerror = ()=>{ status.textContent = "rádio indisponível — tente outra"; };
+  // expõe pra admin poder atualizar a lista sem recarregar a página
+  window._refreshRadioList = ()=>{ populate(); setStation(); };
+}
+
+/* ======================= FOOTER CONTACT ======================= */
+function renderFooterContact(){
+  document.getElementById("footPhone").textContent = "📞 " + state.settings.phone;
+  document.getElementById("footEmail").textContent = "✉️ " + state.settings.email;
+}
+
+/* ======================= ADMIN ======================= */
+function renderAdminGate(){
+  resetShellTheme();
+  document.getElementById("mainView").innerHTML = `
+  <div class="view-admin"><div class="loginGate">
+    <h2>Área restrita</h2>
+    <p>Digite a senha de administrador para continuar.</p>
+    <input type="password" id="adminPassInput" placeholder="Senha">
+    <div class="err" id="adminErr"></div>
+    <button class="adminBtn" style="width:100%" onclick="tryAdminLogin()">Entrar</button>
+  </div></div>`;
+  document.getElementById("adminPassInput").addEventListener("keydown", e=>{ if(e.key==="Enter") tryAdminLogin(); });
+}
+function tryAdminLogin(){
+  const val = document.getElementById("adminPassInput").value;
+  if(val === state.settings.adminPassword){
+    adminUnlocked = true;
+    renderAdmin();
+  } else {
+    document.getElementById("adminErr").textContent = "Senha incorreta.";
+  }
+}
+
+function renderAdmin(){
+  resetShellTheme();
+  let html = `<div class="view-admin"><div class="adminWrap">
+    <div class="adminHead">
+      <h2>Painel administrativo</h2>
+      <button class="adminBtnGhost" onclick="adminUnlocked=false; goTo('home')">Sair</button>
+    </div>
+    <div class="adminTabs">
+      <button data-t="produtos" class="${adminTab==='produtos'?'active':''}">Produtos</button>
+      <button data-t="categorias" class="${adminTab==='categorias'?'active':''}">Categorias</button>
+      <button data-t="notas" class="${adminTab==='notas'?'active':''}">Notas de compradores</button>
+      <button data-t="radios" class="${adminTab==='radios'?'active':''}">Rádios</button>
+      <button data-t="config" class="${adminTab==='config'?'active':''}">Configurações</button>
+    </div>
+    <div class="panel" id="adminPanel"></div>
+  </div></div>`;
+  document.getElementById("mainView").innerHTML = html;
+  document.querySelectorAll(".adminTabs button").forEach(b=> b.onclick=()=>{ adminTab=b.dataset.t; renderAdmin(); });
+  const panel = document.getElementById("adminPanel");
+  if(adminTab==="produtos") panel.innerHTML = adminProdutosHTML();
+  if(adminTab==="categorias") panel.innerHTML = adminCategoriasHTML();
+  if(adminTab==="notas") panel.innerHTML = adminNotasHTML();
+  if(adminTab==="radios") panel.innerHTML = adminRadiosHTML();
+  if(adminTab==="config") panel.innerHTML = adminConfigHTML();
+  wireAdminTab();
+}
+
+function adminProdutosHTML(){
+  const catOptions = state.categories.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  let rows = state.products.map(p=>{
+    const cat = getCategory(p.categoryId);
+    return `<div class="adminRow">
+      <img src="${esc(p.image)||'https://placehold.co/80'}">
+      <div class="grow"><b>${esc(p.name)}</b><span>${cat?esc(cat.name):'—'} • ${money(p.price)} • ${esc(p.size)}${cat?cat.unit:''}</span></div>
+      <div class="rowBtns">
+        <button onclick="editProduct('${p.id}')">Editar</button>
+        <button class="danger" onclick="deleteProduct('${p.id}')">Excluir</button>
+      </div>
+    </div>`;
+  }).join("") || `<div class="empty">Nenhum produto cadastrado.</div>`;
+
+  return `
+  <form id="prodForm">
+    <input type="hidden" id="pf_id">
+    <div class="formGrid">
+      <div class="field"><label>Categoria</label><select id="pf_cat">${catOptions}</select></div>
+      <div class="field"><label>Nome do produto</label><input id="pf_name" placeholder="Ex: Colágeno Hidrolisado"></div>
+      <div class="field"><label>Preço (R$)</label><input id="pf_price" type="number" step="0.01" placeholder="79.90"></div>
+      <div class="field"><label>Quantidade (ml ou mg)</label><input id="pf_size" placeholder="Ex: 500"></div>
+      <div class="field"><label>URL da imagem</label><input id="pf_image" placeholder="https://..."></div>
+      <div class="field"><label>URL do vídeo (opcional)</label><input id="pf_video" placeholder="https://..."></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label>Descrição</label><textarea id="pf_desc" placeholder="Descreva o produto..."></textarea></div>
+    <button type="submit" class="adminBtn">Salvar produto</button>
+    <button type="button" class="adminBtnGhost" style="margin-top:14px;margin-left:8px" onclick="clearProdForm()">Limpar</button>
+  </form>
+  <div class="adminList">${rows}</div>`;
+}
+
+function wireAdminTab(){
+  if(adminTab==="produtos"){
+    document.getElementById("prodForm").onsubmit = (e)=>{
+      e.preventDefault();
+      const id = document.getElementById("pf_id").value || uid("p");
+      const data = {
+        id, categoryId: document.getElementById("pf_cat").value,
+        name: document.getElementById("pf_name").value.trim(),
+        price: parseFloat(document.getElementById("pf_price").value)||0,
+        size: document.getElementById("pf_size").value.trim(),
+        image: document.getElementById("pf_image").value.trim(),
+        video: document.getElementById("pf_video").value.trim(),
+        desc: document.getElementById("pf_desc").value.trim()
+      };
+      if(!data.name){ toast("Dê um nome ao produto."); return; }
+      const idx = state.products.findIndex(p=>p.id===id);
+      if(idx>=0) state.products[idx] = data; else state.products.push(data);
+      saveProducts(); toast("Produto salvo!"); renderAdmin();
+    };
+  }
+  if(adminTab==="categorias"){
+    document.getElementById("catForm").onsubmit = (e)=>{
+      e.preventDefault();
+      const id = document.getElementById("cf_id").value || document.getElementById("cf_name").value.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-");
+      const data = {
+        id, name: document.getElementById("cf_name").value.trim(),
+        unit: document.getElementById("cf_unit").value,
+        order: state.categories.length+1,
+        theme:{
+          bg: document.getElementById("cf_bg").value,
+          accent: document.getElementById("cf_accent").value,
+          secondary: document.getElementById("cf_secondary").value,
+          text: document.getElementById("cf_text").value,
+          card: document.getElementById("cf_card").value
+        }
+      };
+      if(!data.name){ toast("Dê um nome à categoria."); return; }
+      const idx = state.categories.findIndex(c=>c.id===id);
+      if(idx>=0) state.categories[idx] = {...state.categories[idx], ...data}; else state.categories.push(data);
+      saveCategories(); toast("Categoria salva!"); renderAdmin();
+    };
+  }
+  if(adminTab==="notas"){
+    document.getElementById("noteForm").onsubmit = (e)=>{
+      e.preventDefault();
+      const note = {
+        id: uid("n"),
+        buyer: document.getElementById("nf_buyer").value.trim(),
+        text: document.getElementById("nf_text").value.trim(),
+        date: new Date().toLocaleString("pt-BR")
+      };
+      if(!note.buyer){ toast("Informe o nome do comprador."); return; }
+      state.notes.unshift(note);
+      saveNotes(); toast("Nota adicionada!"); renderAdmin();
+    };
+  }
+  if(adminTab==="radios"){
+    document.getElementById("radioForm").onsubmit = (e)=>{
+      e.preventDefault();
+      const id = document.getElementById("rf_id").value || uid("r");
+      const data = {
+        id,
+        label: document.getElementById("rf_label").value.trim(),
+        url: document.getElementById("rf_url").value.trim()
+      };
+      if(!data.label){ toast("Dê um nome pra rádio."); return; }
+      const idx = state.radioStations.findIndex(r=>r.id===id);
+      if(idx>=0) state.radioStations[idx] = data; else state.radioStations.push(data);
+      saveRadios(); toast("Rádio salva!");
+      if(window._refreshRadioList) window._refreshRadioList();
+      renderAdmin();
+    };
+  }
+  if(adminTab==="config"){
+    document.getElementById("cfgForm").onsubmit = (e)=>{
+      e.preventDefault();
+      state.settings.phone = document.getElementById("sf_phone").value.trim();
+      state.settings.email = document.getElementById("sf_email").value.trim();
+      state.settings.whatsapp = document.getElementById("sf_whats").value.trim();
+      state.settings.pixKey = document.getElementById("sf_pix").value.trim();
+      const newPass = document.getElementById("sf_pass").value.trim();
+      if(newPass) state.settings.adminPassword = newPass;
+      saveSettings(); toast("Configurações salvas!"); renderFooterContact();
+    };
+  }
+}
+
+function editProduct(id){
+  const p = state.products.find(x=>x.id===id); if(!p) return;
+  document.getElementById("pf_id").value = p.id;
+  document.getElementById("pf_cat").value = p.categoryId;
+  document.getElementById("pf_name").value = p.name;
+  document.getElementById("pf_price").value = p.price;
+  document.getElementById("pf_size").value = p.size;
+  document.getElementById("pf_image").value = p.image;
+  document.getElementById("pf_video").value = p.video;
+  document.getElementById("pf_desc").value = p.desc;
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function clearProdForm(){
+  ["pf_id","pf_name","pf_price","pf_size","pf_image","pf_video","pf_desc"].forEach(id=>document.getElementById(id).value="");
+}
+function deleteProduct(id){
+  if(!confirm("Excluir este produto?")) return;
+  state.products = state.products.filter(p=>p.id!==id);
+  saveProducts(); toast("Produto excluído."); renderAdmin();
+}
+
+function adminCategoriasHTML(){
+  let rows = state.categories.map(c=>`
+    <div class="adminRow">
+      <div style="width:34px;height:34px;border-radius:8px;background:${c.theme.accent}"></div>
+      <div class="grow"><b>${esc(c.name)}</b><span>unidade: ${esc(c.unit)}</span></div>
+      <div class="rowBtns"><button onclick="editCategory('${c.id}')">Editar tema</button></div>
+    </div>`).join("");
+  return `
+  <p style="font-size:13px;opacity:.65;margin-bottom:14px">Crie novas abas para o site (ex: futuramente "Crochê") e escolha as cores do tema.</p>
+  <form id="catForm">
+    <input type="hidden" id="cf_id">
+    <div class="formGrid">
+      <div class="field"><label>Nome da categoria/aba</label><input id="cf_name" placeholder="Ex: Crochê"></div>
+      <div class="field"><label>Unidade do produto</label>
+        <select id="cf_unit"><option value="un">unidade</option><option value="ml">ml</option><option value="mg">mg</option></select>
+      </div>
+      <div class="field colorField"><label>Cor de fundo</label><input id="cf_bg" type="color" value="#1A1A18"></div>
+      <div class="field colorField"><label>Cor de destaque</label><input id="cf_accent" type="color" value="#C9A961"></div>
+      <div class="field colorField"><label>Cor secundária</label><input id="cf_secondary" type="color" value="#6B5B47"></div>
+      <div class="field colorField"><label>Cor do texto</label><input id="cf_text" type="color" value="#EDE6D8"></div>
+      <div class="field colorField"><label>Cor dos cartões</label><input id="cf_card" type="color" value="#1D1916"></div>
+    </div>
+    <button type="submit" class="adminBtn">Salvar categoria</button>
+  </form>
+  <div class="adminList">${rows}</div>`;
+}
+function editCategory(id){
+  const c = state.categories.find(x=>x.id===id); if(!c) return;
+  document.getElementById("cf_id").value = c.id;
+  document.getElementById("cf_name").value = c.name;
+  document.getElementById("cf_unit").value = c.unit;
+  document.getElementById("cf_bg").value = c.theme.bg;
+  document.getElementById("cf_accent").value = c.theme.accent;
+  document.getElementById("cf_secondary").value = c.theme.secondary;
+  document.getElementById("cf_text").value = c.theme.text;
+  document.getElementById("cf_card").value = c.theme.card;
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function adminNotasHTML(){
+  let rows = state.notes.map(n=>`
+    <div class="noteCard"><b>${esc(n.buyer)}</b><div>${esc(n.text)}</div><div class="meta">${esc(n.date)}
+      <a href="#" onclick="deleteNote('${n.id}');return false;" style="color:#E8703A;margin-left:10px">excluir</a>
+    </div></div>`).join("") || `<div class="empty">Nenhuma nota registrada.</div>`;
+  return `
+  <p style="font-size:13px;opacity:.65;margin-bottom:14px">Registre observações sobre compradores: combinados de entrega, preferências, pendências, etc.</p>
+  <form id="noteForm">
+    <div class="formGrid">
+      <div class="field"><label>Comprador</label><input id="nf_buyer" placeholder="Nome"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label>Nota</label><textarea id="nf_text" placeholder="Ex: combinou entrega para sexta, pagamento em dinheiro."></textarea></div>
+    <button type="submit" class="adminBtn">Adicionar nota</button>
+  </form>
+  <div>${rows}</div>`;
+}
+function deleteNote(id){
+  state.notes = state.notes.filter(n=>n.id!==id);
+  saveNotes(); renderAdmin();
+}
+
+function adminRadiosHTML(){
+  let rows = state.radioStations.map(r=>`
+    <div class="adminRow">
+      <div style="width:34px;height:34px;border-radius:50%;background:${r.url?'#4A7A64':'#6B5B47'};display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto">${r.url?'♪':'—'}</div>
+      <div class="grow"><b>${esc(r.label)}</b><span>${r.url ? esc(r.url) : 'sem link cadastrado'}</span></div>
+      <div class="rowBtns">
+        <button onclick="editRadio('${r.id}')">Editar</button>
+        <button class="danger" onclick="deleteRadio('${r.id}')">Excluir</button>
+      </div>
+    </div>`).join("") || `<div class="empty">Nenhuma rádio cadastrada.</div>`;
+  return `
+  <p style="font-size:13px;opacity:.75;line-height:1.6;margin-bottom:14px">
+    Cole aqui a <b>URL direta do stream de áudio</b> (termina normalmente em algo tocável direto no navegador, sem player por trás).
+    Como achar: abra o site da rádio que você quer, procure o botão "ouvir agora" e, se não tocar direto, veja se o site
+    tem uma página "para outros players" ou "link direto" (é comum em sites como SomaFM, Zeno.FM, Radios.com.br).
+    Se colar o link de uma página comum (ex: uma página do YouTube ou do site da rádio), não vai funcionar — precisa ser
+    o link do <i>arquivo de áudio/stream</i> em si.
+  </p>
+  <form id="radioForm">
+    <input type="hidden" id="rf_id">
+    <div class="formGrid">
+      <div class="field"><label>Nome do gênero/rádio</label><input id="rf_label" placeholder="Ex: Forró & Sertanejo"></div>
+      <div class="field"><label>URL direta do stream</label><input id="rf_url" placeholder="https://..."></div>
+    </div>
+    <button type="submit" class="adminBtn">Salvar rádio</button>
+  </form>
+  <div class="adminList">${rows}</div>`;
+}
+function editRadio(id){
+  const r = state.radioStations.find(x=>x.id===id); if(!r) return;
+  document.getElementById("rf_id").value = r.id;
+  document.getElementById("rf_label").value = r.label;
+  document.getElementById("rf_url").value = r.url;
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function deleteRadio(id){
+  if(!confirm("Excluir esta rádio?")) return;
+  state.radioStations = state.radioStations.filter(r=>r.id!==id);
+  saveRadios(); if(window._refreshRadioList) window._refreshRadioList();
+  toast("Rádio excluída."); renderAdmin();
+}
+
+function adminConfigHTML(){
+  return `
+  <form id="cfgForm">
+    <div class="formGrid">
+      <div class="field"><label>Telefone de contato</label><input id="sf_phone" value="${esc(state.settings.phone)}"></div>
+      <div class="field"><label>E-mail de contato</label><input id="sf_email" value="${esc(state.settings.email)}"></div>
+      <div class="field"><label>WhatsApp (só números, com DDI+DDD)</label><input id="sf_whats" value="${esc(state.settings.whatsapp)}"></div>
+      <div class="field"><label>Chave Pix</label><input id="sf_pix" value="${esc(state.settings.pixKey)}"></div>
+      <div class="field"><label>Nova senha do admin (deixe em branco p/ manter)</label><input id="sf_pass" type="password" placeholder="••••••••"></div>
+    </div>
+    <button type="submit" class="adminBtn">Salvar configurações</button>
+  </form>`;
+}
+
+/* ======================= RENDER MASTER ======================= */
+function render(){
+  renderNav();
+  renderFooterContact();
+  if(route === "admin"){
+    if(adminUnlocked) renderAdmin(); else renderAdminGate();
+    return;
+  }
+  if(route === "home"){ renderHome(); return; }
+  const cat = getCategory(route);
+  if(cat) renderCategory(route);
+  else { route="home"; renderHome(); }
+}
+
+/* ======================= INIT ======================= */
+async function init(){
+  await loadState();
+  initRadio();
+  const h = location.hash.replace("#/", "");
+  route = h || "home";
+  render();
+}
+init();
+</script>
+</body>
+</html>
