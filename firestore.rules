@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Qualquer visitante pode LER produtos, categorias, rádios e configurações
+    // (é preciso, senão o site não mostra nada pra ninguém).
+    // Só quem estiver logado (ou seja, você, com o usuário criado no
+    // Authentication) pode ESCREVER/editar/excluir qualquer coisa.
+    match /{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
